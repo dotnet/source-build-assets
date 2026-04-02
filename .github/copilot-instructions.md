@@ -57,6 +57,19 @@ find src/referencePackages/src/package.name/version -name "Customizations.*"
 - Patches live in `src/externalPackages/patches/<component>/`
 - Test patches with `git am` before suggesting
 
+#### Patch Minimization Principles
+
+- **Push behavior to the `.proj` file first.** Many build behaviors (disabling analyzers, NuGet audit,
+  code-style enforcement, version overrides, TFM restrictions) can be controlled via `/p:` arguments
+  in the [project file](../src/externalPackages/projects). Check if the upstream repo already defines
+  an MSBuild property before patching (e.g. `SkipAnalysis`, `IntegrationBuild`, `EnablePublicApi`).
+- **Use MSBuild conditions, not deletions.** When a patch is necessary, add a `Condition` attribute
+  (e.g. `Condition="'$(DotNetBuildSourceOnly)' != 'true'"`) instead of removing the XML element.
+  This produces smaller diffs and is potentially upstreamable.
+- **Keep CPM enabled.** If the upstream project uses Central Package Management, do not disable it.
+  Instead, update version pins in `Directory.Packages.props` using a source-build condition block
+  to align with versions available in SBRP.
+
 ## Validation Checklist
 
 After any package changes:
