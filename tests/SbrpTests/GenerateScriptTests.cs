@@ -55,7 +55,13 @@ public class GenerateScriptTests
 
         Assert.True(Directory.Exists(pkgSrcDirectory), $"Source directory '{pkgSrcDirectory}' does not exist.");
 
-        ExecuteHelper.ExecuteProcessValidateExitCode(command, arguments, Output);
+        string packagesDir = Path.Combine(SandboxDirectory, ".packages");
+        Directory.CreateDirectory(packagesDir);
+        ExecuteHelper.ExecuteProcessValidateExitCode(command, arguments, Output, p =>
+        {
+            p.StartInfo.Environment["NUGET_PACKAGES"] = packagesDir;
+            p.StartInfo.Environment["NuGetPackageRoot"] = packagesDir;
+        });
 
         // Copy any customization files from the source directory to the sandbox directory.
         // This is necessary because git diff doesn't support exclusions when comparing files outside of the repository.
