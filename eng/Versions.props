@@ -21,6 +21,9 @@
     <MSBuildLocatorReleaseVersion>1.10.2</MSBuildLocatorReleaseVersion>
     <SolutionPersistenceVersion>1.0.52</SolutionPersistenceVersion>
     <SpectreConsoleReleaseVersion>0.54.0</SpectreConsoleReleaseVersion>
+    <OpenTelemetryDotNetReleaseVersion>1.15.1</OpenTelemetryDotNetReleaseVersion>
+    <OpenTelemetryDotNetContribHttpReleaseVersion>1.15.0</OpenTelemetryDotNetContribHttpReleaseVersion>
+    <OpenTelemetryDotNetContribRuntimeReleaseVersion>1.15.0</OpenTelemetryDotNetContribRuntimeReleaseVersion>
   </PropertyGroup>
 
   <PropertyGroup>

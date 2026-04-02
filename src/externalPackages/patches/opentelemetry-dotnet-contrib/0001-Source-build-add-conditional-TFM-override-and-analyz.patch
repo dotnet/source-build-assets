@@ -1,0 +1,41 @@
+From dd34bcf0d61cca3b579f4df69752493810706d4c Mon Sep 17 00:00:00 2001
+From: Chet Husk <chusk3@gmail.com>
+Date: Thu, 2 Apr 2026 12:22:10 -0500
+Subject: [PATCH] Source-build: add conditional TFM override and analyzer guard
+
+Add DotNetBuildSourceOnly conditions to:
+- Restrict target frameworks to BundledNETCoreAppTargetFramework;netstandard2.0
+- Skip Microsoft.NETFramework.ReferenceAssemblies GlobalPackageReference
+---
+ Directory.Packages.props | 2 +-
+ build/Common.props       | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Directory.Packages.props b/Directory.Packages.props
+index 8ab2b3a2..a72ee4ec 100644
+--- a/Directory.Packages.props
++++ b/Directory.Packages.props
+@@ -32,7 +32,7 @@
+   </ItemGroup>
+ 
+   <ItemGroup Label="Packages referenced in all projects">
+-    <GlobalPackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
++    <GlobalPackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" Condition="'$(DotNetBuildSourceOnly)' != 'true'" />
+     <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" Condition="'$(SkipAnalysis)'!='true'" PrivateAssets="All" />
+   </ItemGroup>
+ 
+diff --git a/build/Common.props b/build/Common.props
+index f137680e..599bd51a 100644
+--- a/build/Common.props
++++ b/build/Common.props
+@@ -10,6 +10,7 @@
+     <NetStandardMinimumSupportedVersion>netstandard2.0</NetStandardMinimumSupportedVersion>
+     <!-- OmniSharp/VS Code requires TargetFrameworks to be in descending order for IntelliSense and analysis. -->
+     <TargetFrameworksForLibraries>net10.0;$(NetMinimumSupportedVersion);$(NetStandardMinimumSupportedVersion)</TargetFrameworksForLibraries>
++    <TargetFrameworksForLibraries Condition="'$(DotNetBuildSourceOnly)' == 'true'">$(BundledNETCoreAppTargetFramework);netstandard2.0</TargetFrameworksForLibraries>
+     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+     <AnalysisLevel>latest-all</AnalysisLevel>
+     <Nullable>enable</Nullable>
+-- 
+2.52.0.windows.1
+
