@@ -12,7 +12,7 @@ using Xunit.Abstractions;
 
 namespace SbrpTests;
 
-public class GenerateScriptTests : IDisposable
+public class GenerateScriptTests
 {
     public static IEnumerable<object[]> Data => new List<object[]>
     {
@@ -33,15 +33,6 @@ public class GenerateScriptTests : IDisposable
         Output = output;
         SandboxDirectory = Path.Combine(Environment.CurrentDirectory, $"GenerateTests-{DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()}");
         Directory.CreateDirectory(SandboxDirectory);
-    }
-
-    public void Dispose()
-    {
-        // Clean up the sandbox directory when done testing to prevent hoovering up large artifacts directories in pipelines
-        if (Directory.Exists(SandboxDirectory))
-        {
-            Directory.Delete(SandboxDirectory, recursive: true);
-        }
     }
 
     [Theory]
@@ -97,6 +88,12 @@ public class GenerateScriptTests : IDisposable
         else if (result.Process.ExitCode != 0)
         {
             Assert.Fail($"Unexpected git diff failure on '{package}, {version}'.  {Environment.NewLine}{result.StdErr}{Environment.NewLine}");
+        }
+
+         // Clean up the sandbox directory when done testing to prevent hoovering up large artifacts directories in pipelines
+        if (Directory.Exists(pkgSandboxDirectory))
+        {
+            Directory.Delete(pkgSandboxDirectory, recursive: true);
         }
     }
 }
