@@ -9,6 +9,7 @@ stages:
     parameters:
       artifacts:
         publish:
+          artifacts: true
           logs: true
       enablePublishTestResults: true
       enableTelemetry: true
@@ -35,7 +36,6 @@ stages:
           submodules: recursive
         - script: ./build.sh --ci --test -bl -c Release
           displayName: Build and Test
-        - template: /azure-pipelines/templates/steps/publish-packages.yml
 
       - job: windows
         displayName: Windows
@@ -57,4 +57,3 @@ stages:
           submodules: recursive
         - script: .\build.cmd -ci -test -bl -configuration Release
           displayName: Build and Test
-        - template: /azure-pipelines/templates/steps/publish-packages.yml
