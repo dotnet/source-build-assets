@@ -89,5 +89,8 @@ public class GenerateScriptTests
         {
             Assert.Fail($"Unexpected git diff failure on '{package}, {version}'.  {Environment.NewLine}{result.StdErr}{Environment.NewLine}");
         }
+
+        // Clean up the sandbox directory on success to avoid accumulating large temp directories.
+        Directory.Delete(SandboxDirectory, recursive: true);
     }
 }
