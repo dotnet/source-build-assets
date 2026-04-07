@@ -4,6 +4,11 @@
     <PackagesOutput>$(ProjectDirectory)bin/$(Configuration)</PackagesOutput>
     <CustomRepoBuild>true</CustomRepoBuild>
     <SourceRevisionId>2faa7e8b157a431daa2e71785d68abd5fa817b53</SourceRevisionId>
+    <!-- The FileVersion revision from the Microsoft-shipped package. This must be updated
+         when the submodule is updated. See https://github.com/dotnet/source-build/issues/5510 -->
+    <FileVersionRevision>29</FileVersionRevision>
+    <!-- Used by the update-external-metadata script to determine the package to download. -->
+    <FileVersionValidationPackage>Microsoft.ApplicationInsights</FileVersionValidationPackage>
   </PropertyGroup>
 
   <Target Name="CustomRepoBuild">
@@ -11,6 +16,8 @@
       <BuildCommandArgs>$(ProjectDirectory)BASE/src/Microsoft.ApplicationInsights/Microsoft.ApplicationInsights.csproj</BuildCommandArgs>
       <BuildCommandArgs>$(BuildCommandArgs) /p:Configuration=$(Configuration)</BuildCommandArgs>
       <BuildCommandArgs>$(BuildCommandArgs) /p:StableRelease=True</BuildCommandArgs>
+      <BuildCommandArgs>$(BuildCommandArgs) /p:AssemblyVersion=$(ApplicationInsightsReleaseVersion).$(FileVersionRevision)</BuildCommandArgs>
+      <BuildCommandArgs>$(BuildCommandArgs) /p:FileVersion=$(ApplicationInsightsReleaseVersion).$(FileVersionRevision)</BuildCommandArgs>
       <BuildCommandArgs>$(BuildCommandArgs) /p:RelativeOutputPathBase=</BuildCommandArgs>
       <BuildCommandArgs>$(BuildCommandArgs) /v:$(LogVerbosity)</BuildCommandArgs>
       <BuildCommandArgs>$(BuildCommandArgs) $(RedirectRepoOutputToLog)</BuildCommandArgs>
