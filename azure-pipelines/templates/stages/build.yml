@@ -36,8 +36,8 @@ stages:
       condition: always()
 
   ## The job below is a temporary workaround for running the tests on Windows.
-  ## Currently, the source-build-reference-packages repository does not support building on Windows, but it is capable of running the generate tooling tests on Windows.
-  ## This job should be modified once the source-build-reference-packages repository supports building on Windows by transitioning to the template above.
+  ## Currently, the source-build-assets repository does not support building on Windows, but it is capable of running the generate tooling tests on Windows.
+  ## This job should be modified once the source-build-assets repository supports building on Windows by transitioning to the template above.
   - job: Windows
     pool:
       ${{ if eq(variables['System.TeamProject'], 'public') }}:

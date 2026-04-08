@@ -31,7 +31,7 @@ is supported on both Windows and Unix based operating systems.
 New packages are needed from time to time as
 [existing dependency versions are upgraded](https://github.com/dotnet/source-build/blob/main/Documentation/sourcebuild-in-repos/update-dependencies.md)
 and [new dependencies are added](https://github.com/dotnet/source-build/blob/main/Documentation/sourcebuild-in-repos/new-dependencies.md)
-to .NET. The [generate script](https://github.com/dotnet/source-build-reference-packages/blob/main/generate.sh)
+to .NET. The [generate script](https://github.com/dotnet/source-build-assets/blob/main/generate.sh)
 supports generating new packages. Run `generate.sh --help` for usage details.
 
 When generating a package(s), the tooling will detect and generate all dependent packages.
@@ -54,7 +54,7 @@ for detailed guidance.
 ```
 
 After generating new reference packages, all new projects must be referenced as a
-[DependencyPackageProjects](https://github.com/dotnet/source-build-reference-packages/blob/main/eng/Build.props#L9).
+[DependencyPackageProjects](https://github.com/dotnet/source-build-assets/blob/main/eng/Build.props#L9).
 These must be defined in dependency order. There is a
 [tracking issue](https://github.com/dotnet/source-build/issues/1690) to address this manual step.
 
@@ -74,7 +74,7 @@ generated packages show changes when being regenerated.
     2. The generate tooling has changed since the last time this package was generated. The new changes should
     be considered better/correct and should be committed.
 * Add `DependencyPackageProjects` for all new projects in the
-[eng/Build.props](https://github.com/dotnet/source-build-reference-packages/blob/main/eng/Build.props#L9)
+[eng/Build.props](https://github.com/dotnet/source-build-assets/blob/main/eng/Build.props#L9)
 in the correct dependency order.
 * Run build with the `./build.sh -sb` command.
 * If the compilation produces numerous compilation issue - run the `./build.sh --projects <path to .csproj file>`
