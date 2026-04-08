@@ -3,7 +3,7 @@
 <Project>
 
   <PropertyGroup>
-    <GitHubRepositoryName>source-build-reference-packages</GitHubRepositoryName>
+    <GitHubRepositoryName>source-build-assets</GitHubRepositoryName>
     <SourceBuildManagedOnly>true</SourceBuildManagedOnly>
   </PropertyGroup>
 
