@@ -19,7 +19,7 @@ public class GenerateScriptTests
         new object[] { "Microsoft.Build.NoTargets", "3.7.0", PackageType.Text }, // Text only package
         new object[] { "Microsoft.CodeAnalysis.PooledObjects", "5.0.0-1.25277.114", PackageType.Text }, // Text only package w/reference package dependencies
         new object[] { "System.Memory", "4.6.3", PackageType.Reference }, // Simple reference package w/o customizations
-        new object[] { "System.Threading.Channels", "8.0.0", PackageType.Reference }, // Reference package w/numerous TFMs
+        new object[] { "Microsoft.Bcl.Cryptography", "10.0.4", PackageType.Reference }, // Reference package w/numerous TFMs
         new object[] { "System.Text.Json", "8.0.5", PackageType.Reference }, // Package w/Customizations.props
         new object[] { "System.Collections.Immutable", "8.0.0", PackageType.Reference }, // Package w/Customizations.cs
         new object[] { "Microsoft.NETCore.App.Ref", "10.0.0", PackageType.Target }, // Target pack
