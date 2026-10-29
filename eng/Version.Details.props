@@ -9,8 +9,8 @@ This file should be imported by eng/Versions.props
     <MicrosoftBclCryptographyPackageVersion>10.0.15</MicrosoftBclCryptographyPackageVersion>
     <MicrosoftBuildPackageVersion>18.0.38</MicrosoftBuildPackageVersion>
     <MicrosoftBuildUtilitiesCorePackageVersion>18.0.38</MicrosoftBuildUtilitiesCorePackageVersion>
-    <MicrosoftDotNetArcadeSdkPackageVersion>10.0.0-beta.26526.119</MicrosoftDotNetArcadeSdkPackageVersion>
-    <MicrosoftDotNetGenAPITaskPackageVersion>10.0.115-servicing.26526.119</MicrosoftDotNetGenAPITaskPackageVersion>
+    <MicrosoftDotNetArcadeSdkPackageVersion>10.0.0-beta.26527.118</MicrosoftDotNetArcadeSdkPackageVersion>
+    <MicrosoftDotNetGenAPITaskPackageVersion>10.0.115-servicing.26527.118</MicrosoftDotNetGenAPITaskPackageVersion>
     <MicrosoftNETCoreILAsmPackageVersion>10.0.15</MicrosoftNETCoreILAsmPackageVersion>
     <MicrosoftNETCoreILDAsmPackageVersion>10.0.15</MicrosoftNETCoreILDAsmPackageVersion>
   </PropertyGroup>
