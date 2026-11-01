@@ -12,7 +12,7 @@
     "dotnet": "8.0.131"
   },
   "msbuild-sdks": {
-    "Microsoft.DotNet.Arcade.Sdk": "8.0.0-beta.26468.3",
+    "Microsoft.DotNet.Arcade.Sdk": "8.0.0-beta.26528.7",
     "Microsoft.Build.NoTargets": "3.7.0"
   }
 }
