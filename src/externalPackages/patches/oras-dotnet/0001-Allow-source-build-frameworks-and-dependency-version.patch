@@ -1,0 +1,63 @@
+From e998c6beb5e8e552846842b85231f1eb4dc0be19 Mon Sep 17 00:00:00 2001
+From: Joseph Petersen <me@jetersen.dev>
+Date: Tue, 17 Nov 2026 19:08:13 +0100
+Subject: [PATCH] Allow source-build frameworks and dependency version lifting
+
+Signed-off-by: Joseph Petersen <me@jetersen.dev>
+---
+ Directory.Build.props                        |  2 +-
+ src/OrasProject.Oras/OrasProject.Oras.csproj | 12 ++++++++++--
+ 2 files changed, 11 insertions(+), 3 deletions(-)
+
+diff --git a/Directory.Build.props b/Directory.Build.props
+index 0892c9c..0ea920a 100644
+--- a/Directory.Build.props
++++ b/Directory.Build.props
+@@ -19,7 +19,7 @@ limitations under the License.
+     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+   </PropertyGroup>
+ 
+-  <ItemGroup>
++  <ItemGroup Condition="'$(DotNetBuildSourceOnly)' != 'true'">
+     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.403" PrivateAssets="all" />
+   </ItemGroup>
+ </Project>
+diff --git a/src/OrasProject.Oras/OrasProject.Oras.csproj b/src/OrasProject.Oras/OrasProject.Oras.csproj
+index 605b0f8..ae6958e 100644
+--- a/src/OrasProject.Oras/OrasProject.Oras.csproj
++++ b/src/OrasProject.Oras/OrasProject.Oras.csproj
+@@ -13,6 +13,11 @@ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+ <Project Sdk="Microsoft.NET.Sdk">
++	<Import Project="$(DotNetPackageVersionPropsPath)"
++			Condition="'$(DotNetBuildSourceOnly)' == 'true' and '$(DotNetPackageVersionPropsPath)' != ''" />
++	<PropertyGroup Condition="'$(DotNetBuildSourceOnly)' == 'true'">
++		<MicrosoftExtensionsCachingMemoryVersion Condition="'$(MicrosoftExtensionsCachingMemoryVersion)' == ''">10.0.0</MicrosoftExtensionsCachingMemoryVersion>
++	</PropertyGroup>
+ 	<PropertyGroup>
+ 		<TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+ 		<PackageId>OrasProject.Oras</PackageId>
+@@ -37,14 +42,17 @@ limitations under the License.
+ 			<_Parameter1>OrasProject.Oras.Tests</_Parameter1>
+ 		</AssemblyAttribute>
+ 	</ItemGroup>
+-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
++	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0' and '$(DotNetBuildSourceOnly)' != 'true'">
+ 		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
+ 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
+ 	</ItemGroup>
+-	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
++	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0' and '$(DotNetBuildSourceOnly)' != 'true'">
+ 		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="10.0.0" />
+ 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.0" />
+ 	</ItemGroup>
++	<ItemGroup Condition="'$(DotNetBuildSourceOnly)' == 'true'">
++		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="$(MicrosoftExtensionsCachingMemoryVersion)" />
++	</ItemGroup>
+ 	<ItemGroup>
+ 		<None Include="README.md" Pack="true" PackagePath="/" />
+ 	</ItemGroup>
+-- 
+2.54.0
+

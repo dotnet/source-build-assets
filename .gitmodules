@@ -37,3 +37,7 @@
 [submodule "antissrf"]
 	path = src/externalPackages/src/antissrf
 	url = https://github.com/microsoft/AntiSSRF.git
+[submodule "src/externalPackages/src/oras-dotnet"]
+	path = src/externalPackages/src/oras-dotnet
+	url = https://github.com/jetersen/oras-dotnet.git
+	branch = feature/token-http-client
