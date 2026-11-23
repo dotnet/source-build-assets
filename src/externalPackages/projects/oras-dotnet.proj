@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.Build.NoTargets">
+
+  <PropertyGroup>
+    <GlobalJsonFile>$(ProjectDirectory)global.json</GlobalJsonFile>
+    <PackagesOutput>$(ProjectDirectory)pack/</PackagesOutput>
+    <SourceRevisionId>b1cc2abbcdbfc6abee22fefbc5a62d166bcc5cca</SourceRevisionId>
+
+    <DotNetToolArgs>/p:Configuration=$(Configuration)</DotNetToolArgs>
+    <DotNetToolArgs>$(DotNetToolArgs) /p:TargetFrameworks=$(NetCurrent)</DotNetToolArgs>
+    <DotNetToolArgs>$(DotNetToolArgs) /p:DotNetBuildSourceOnly=true</DotNetToolArgs>
+    <DotNetToolArgs>$(DotNetToolArgs) /p:PackageVersion=$(OrasDotnetReleaseVersion)</DotNetToolArgs>
+    <DotNetToolArgs>$(DotNetToolArgs) /p:GeneratePackageOnBuild=false</DotNetToolArgs>
+
+    <BuildCommand>&quot;$(DotNetTool)&quot; pack &quot;$(ProjectDirectory)src/OrasProject.Oras/OrasProject.Oras.csproj&quot; --output &quot;$(PackagesOutput)&quot; /bl:$(ArtifactsLogRepoDir)build.binlog $(DotNetToolArgs)</BuildCommand>
+  </PropertyGroup>
+
+</Project>

@@ -18,6 +18,9 @@
          as external packages (which includes newtonsoft.json) build last. -->
     <NewtonsoftJsonBootstrapVersion>13.0.4</NewtonsoftJsonBootstrapVersion>
 
+    <!-- Unreleased ORAS #468 integration snapshot; replace with its release before shipping. -->
+    <OrasDotnetReleaseVersion>0.0.0-dev</OrasDotnetReleaseVersion>
+
     <Antlr4Version>4.13.1</Antlr4Version>
     <AntiSSRFReleaseVersion>1.0.0</AntiSSRFReleaseVersion>
     <AzureActiveDirectoryIdentityModelExtensionsForDotNetReleaseVersion>8.19.2</AzureActiveDirectoryIdentityModelExtensionsForDotNetReleaseVersion>
